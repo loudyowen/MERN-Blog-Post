@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+import Post from "../../client/src/component/Posts/Post/Post.js";
 import PostMessage from "../models/postMessage.js";
 
 export const getPosts = async (req,res)=>{
@@ -21,4 +23,17 @@ export const createPost = async (req,res) => {
     } catch (error) {
         res.status(409).json({message: error.message})
     }
+}
+
+export const updatePost = async (req,res) => {
+    // in object destructring we rename the id to _id
+    const {id:_id} = req.params;
+    const post = req.body;
+
+    // if id is not a mongoose object then return id is not found
+    if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("ID is not found");
+
+    // then we update
+    const updatedPost = PostMessage.findByIdAndUpdate(_id, post, {new: true});
+    res.json(updatePost)
 }

@@ -1,11 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import useStyles from "./styles";
 import { TextField, Button, Typography, Paper} from '@material-ui/core'
 import FileBase from 'react-file-base64';
-import { useDispatch } from "react-redux";
-import {createPost} from '../../actions/posts'
+import { useDispatch, useSelector } from "react-redux";
+import {createPost, updatePost} from '../../actions/posts'
 
-const Form = () => {
+const Form = ({currentId, setCurrentId}) => {
     const [postData,setPostData] = useState({
         creator: '',
         title: '',
@@ -13,13 +13,30 @@ const Form = () => {
         tags: '',
         selectedFile: ''
     })
+    //fetch data from redux
+    // we just want to fetch the post with currentId, so we return if it have currentId then we find post data with the id === currentId, if not then just return null
+    const postEdit = useSelector((state)=> (currentId ? state.posts.find((post) => post._id === currentId) : null));
+
     const styles = useStyles();
     const dispatch = useDispatch();
+
+    // here we use useEffect to populate the data to the form, base on postEdit existing we can see in [postEdit]
+    useEffect(()=>{
+        // if the postEdit is exist then we simply populate the data with the postEdit
+        if(postEdit) setPostData(postEdit);
+    }, [postEdit])
+
+    
 
     const handleSubmit = (e) =>{
         //to not get refresh from the browser
         e.preventDefault();
-        dispatch(createPost(postData));
+        // if we have current id (from the MoreHoriz button) then we dispatch for update if not the create new post
+        if(currentId){
+            dispatch(updatePost(currentId, postData));
+        }else{
+            dispatch(createPost(postData));
+        }
 
     }
 
