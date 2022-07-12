@@ -35,3 +35,16 @@ export const updatePost = (id, post) => async (dispatch) =>{
         console.log(error)
     }
 }
+
+export const deletePost = (id) => async (dispatch) => {
+    try {
+        //doesn't need to declare the data because we just want to delete
+        await api.deletePost(id);
+        dispatch({type:'DELETE' ,payload: id})
+        console.log('DELETE')
+
+    } catch (error) {
+        console.log(error)
+        
+    }
+}

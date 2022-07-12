@@ -9,6 +9,9 @@ export default (posts = [], action) =>{
         case 'UPDATE':
             // here we find the post with id === action.payload id, if found we return the payload if not then just return the post back
             return posts.map((post)=>(post._id === action.payload._id ? action.payload : post))
+        case 'DELETE':
+            // filter mean we return all array except the array that have the id that we want to delete
+            return posts.filter((post)=>(post._id!==action.payload));
         default:
             return posts;
     }
