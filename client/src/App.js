@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { 
     Container,
     AppBar,
@@ -13,8 +13,10 @@ import blogIcon from './images/memories.png'
 import Posts from "./component/Posts/Posts";
 import Form from "./component/Form/Form";
 import useStyles from "./styles";
+import './App.css'
 
 const App = () =>{
+    const [currentId, setCurrentId] = useState(null);
     const styles = useStyles();
     const dispatch = useDispatch();
 
@@ -26,7 +28,7 @@ const App = () =>{
     useEffect(()=>{
         // use dispatch to dispacth an action
         dispatch(getPosts());
-    },[dispatch])
+    },[currentId, dispatch]) //-> update without refresh with just added currentId in here because useEffect will work when we submit the form because the current id is change to null in the form so the useEffect will run
 
     return(
         <Container maxWidth='lg'>
@@ -40,11 +42,11 @@ const App = () =>{
                 <Container>
                     <Grid container justifyContent="space-between" alignItem="strech" spacing={3} >
                         <Grid item xs={12} sm={7}>
-                            <Posts />
+                            <Posts setCurrentId={setCurrentId} />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             {/* MAKE THE FORM TO BE MODAL */}
-                            <Form />
+                            <Form currentId={currentId} setCurrentId={setCurrentId}/>
                         </Grid>
                     </Grid>
                 </Container>

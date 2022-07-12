@@ -7,7 +7,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 
-const Post = ({post}) => {
+const Post = ({post, setCurrentId}) => {
     const styles = useStyles();
 
     return(
@@ -18,7 +18,7 @@ const Post = ({post}) => {
                 <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
             </div>
             <div className={styles.overlay2}>
-                <Button style={{color: "white"}} size="small" onClick={()=>{}}>
+                <Button style={{color: "white"}} size="small" onClick={()=>{setCurrentId(post._id)}}>
                     <MoreHorizIcon fontSize="medium" />
                 </Button>
             </div>
@@ -27,8 +27,11 @@ const Post = ({post}) => {
                     {post.tags.map((tag)=>`#${tag} `)}
                 </Typography>
             </div>
+            <Typography className={styles.title} variant="h5" gutterBottom>
+                    {post.title}
+                </Typography>
             <CardContent>
-                <Typography className={styles.title} variant="h5" gutterBottom>
+                <Typography variant="h5" gutterBottom>
                     {post.message}
                 </Typography>
             </CardContent>
