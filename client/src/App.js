@@ -1,4 +1,4 @@
-import React, {useEffect,  useState} from "react";
+import React, {useEffect} from "react";
 import { 
     Container,
     AppBar,
@@ -15,7 +15,6 @@ import Form from "./component/Form/Form";
 import useStyles from "./styles";
 
 const App = () =>{
-    const [currentId, setCurrentId] = useState(0);
     const styles = useStyles();
     const dispatch = useDispatch();
 
@@ -41,11 +40,11 @@ const App = () =>{
                 <Container>
                     <Grid container justifyContent="space-between" alignItem="strech" spacing={3} >
                         <Grid item xs={12} sm={7}>
-                            <Posts setCurrentId={setCurrentId}/>
+                            <Posts />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             {/* MAKE THE FORM TO BE MODAL */}
-                            <Form currentId={currentId} setCurrentId={setCurrentId}/>
+                            <Form />
                         </Grid>
                     </Grid>
                 </Container>
