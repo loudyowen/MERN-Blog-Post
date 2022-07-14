@@ -15,7 +15,7 @@ dotenv.config();
 const URL_DB = `${process.env.DB_URL}`
 const PORT = process.env.PORT || 5000;
 
-app.use('/posts', postRouter)
+app.use('/blogs', postRouter)
 
 // code for connection to database
 // chain with .then and .catch because it's a promise function, if this true .then will call our app
