@@ -1,4 +1,5 @@
 import * as api from '../api';
+import {CREATE,FETCH_ALL,UPDATE,DELETE,LIKE_POST} from '../constant/actionType'
 
 // api.fetchPosts
 
@@ -7,7 +8,7 @@ import * as api from '../api';
 export const getPosts = () => async (dispatch) => {
     try {
         const { data } = await api.fetchPosts();
-        const action = {type:'FETCH_ALL', payload: data};
+        const action = {type: FETCH_ALL, payload: data};
         // normally we go like this
         // return action;
         // but with redux-thunk we go like this
@@ -21,7 +22,7 @@ export const createPost = (post) => async (dispatch) => {
     try {
         const { data } = await api.createPosts(post);
         // same as action in the getPosts
-        dispatch({type:'CREATE',payload: data})
+        dispatch({type: CREATE,payload: data})
     } catch (error) {
         console.log(error)
     }
@@ -30,7 +31,7 @@ export const createPost = (post) => async (dispatch) => {
 export const updatePost = (id, postData) => async (dispatch) =>{
     try {
         const {data} = await api.updatePost(id,postData);
-        dispatch({type:'UPDATE', payload: data})
+        dispatch({type: UPDATE, payload: data})
     } catch (error) {
         console.log(error)
     }
@@ -40,8 +41,7 @@ export const deletePost = (id) => async (dispatch) => {
     try {
         //doesn't need to declare the data because we just want to delete
         await api.deletePost(id);
-        dispatch({type:'DELETE' ,payload: id})
-        console.log('DELETE')
+        dispatch({type: DELETE ,payload: id})
 
     } catch (error) {
         console.log(error)
@@ -52,7 +52,7 @@ export const deletePost = (id) => async (dispatch) => {
 export const updateLikePost = (id) => async (dispatch) => {
     try {
         const { data } = await api.updateLikePost(id);
-        dispatch({type: 'LIKE_POST', payload: data});
+        dispatch({type:  LIKE_POST, payload: data});
     } catch (error) {
         console.log(error)
     }
