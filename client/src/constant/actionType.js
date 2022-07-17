@@ -6,3 +6,5 @@ export const LIKE_POST = 'LIKE_POST'
 
 export const AUTH = 'AUTH'
 export const LOGOUT = 'LOGOUT'
+export const SIGN_IN = 'SIGN_IN'
+export const SIGN_OUT = 'SIGN_OUT'

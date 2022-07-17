@@ -8,6 +8,7 @@ import LockOutLinedIcon from '@material-ui/icons/LockOutlined'
 import { GoogleLogin, GoogleOAuthProvider } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 
+import {signIn, signUp} from '../../actions/auth'
 
 import useStyles from './styles'
 import Input from './Input';
@@ -20,16 +21,30 @@ function Auth() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     // const dotenv = dotenv.config();
-
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+    });
     const [isSignUp, setIsSignUp] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(formData)
+        if(isSignUp){
+            dispatch(signUp(formData))
+        }else{
+            dispatch(signIn(formData))
+        }
+
 
     }
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: [e.target.value]})
     }
 
 

@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import postRouter from './routes/post.js';
+import userRouter from './routes/user.js';
 import dotenv from 'dotenv';
 
 
@@ -19,6 +20,7 @@ app.get('/',(req,res)=>{
     res.send("welcome to the backend")
 })
 
+app.use('/users', userRouter)
 app.use('/blogs', postRouter)
 
 // code for connection to database
