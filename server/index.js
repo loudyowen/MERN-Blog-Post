@@ -15,6 +15,10 @@ dotenv.config();
 const URL_DB = `${process.env.DB_URL}`
 const PORT = process.env.PORT || 5000;
 
+app.get('/',(req,res)=>{
+    res.send("welcome to the backend")
+})
+
 app.use('/blogs', postRouter)
 
 // code for connection to database
