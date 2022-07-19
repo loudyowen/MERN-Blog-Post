@@ -35,9 +35,9 @@ function Auth() {
         e.preventDefault();
         // console.log(formData)
         if(isSignUp){
-            dispatch(signUp(formData))
+            dispatch(signUp(formData,navigate))
         }else{
-            dispatch(signIn(formData))
+            dispatch(signIn(formData,navigate))
         }
 
 
@@ -55,7 +55,7 @@ function Auth() {
 
     const switchMode = () => {
         setIsSignUp((prevIsSignUp)=>!prevIsSignUp)
-        // handleShowPassword(false)
+        setShowPassword(false)
     }
 
     const googleSuccess = async (res) => {
@@ -99,11 +99,12 @@ function Auth() {
                         <Input name="email" label="Email" handleChange={handleChange} type="email" />
                     
                         {/* type berupa if else untuk menentukan apakah user melakukan click show password atau tidak */}
-                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
+                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                        
                         
                         {/* hanya muncul untuk sign up */}
                         {isSignUp && (
-                            <Input name="confirmPassword" label="Confrim Password" handleChange={handleChange} type="password" />
+                            <Input name="confirmPassword" label="Confrim Password" handleChange={handleChange} type='password' />
                             )}
                     </Grid>
                     <Button className={styles.submit} type='submit' color='primary' variant="contained" fullWidth>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>

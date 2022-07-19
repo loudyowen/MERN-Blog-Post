@@ -5,11 +5,11 @@ const user = mongoose.Schema({
         type: String,
         required: true
     },
-    user_name:{
+    userName:{
         type: String,
         required: true
     },
-    user_password:{
+    userPassword:{
         type: String,
         required: true
     },
@@ -17,8 +17,8 @@ const user = mongoose.Schema({
         type: String,
         required: true
     },
-    first_name: String,
-    last_name: String
+    firstName: String,
+    lastName: String
 
 })
 
