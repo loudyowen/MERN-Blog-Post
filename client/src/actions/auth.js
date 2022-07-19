@@ -1,23 +1,23 @@
 import * as api from '../api';
-import {SIGN_IN, SIGN_OUT} from '../constant/actionType'
-import { useNavigate } from 'react-router-dom';
+import {AUTH} from '../constant/actionType'
 
-export const signUp = (formData) => async (dispatch)=>{
-    const navigate = useNavigate();
+export const signUp = (formData, navigate) => async (dispatch)=>{
     try {
-        // sign uo
+        const {data} = await api.signUp(formData);
+        dispatch({type: AUTH, payload: data})
         navigate('/')
     } catch (error) {
-        
+        console.log(error)
     }
+    // console.log(formData);
 }
 
-export const signIn = (formData) => async (dispatch)=>{
-    const navigate = useNavigate();
+export const signIn = (formData, navigate) => async (dispatch)=>{
     try {
-        
+        const {data} = await api.signIn(formData);
+        dispatch({type: AUTH, payload: data})
         navigate('/')
     } catch (error) {
-        
+        console.log(error)
     }
 }

@@ -35,9 +35,9 @@ function Auth() {
         e.preventDefault();
         // console.log(formData)
         if(isSignUp){
-            dispatch(signUp(formData))
+            dispatch(signUp(formData, navigate))
         }else{
-            dispatch(signIn(formData))
+            dispatch(signIn(formData, navigate))
         }
 
 
@@ -55,6 +55,7 @@ function Auth() {
 
     const switchMode = () => {
         setIsSignUp((prevIsSignUp)=>!prevIsSignUp)
+        setShowPassword(false)
         // handleShowPassword(false)
     }
 
