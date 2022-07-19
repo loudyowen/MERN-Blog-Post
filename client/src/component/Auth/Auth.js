@@ -15,6 +15,7 @@ import Input from './Input';
 import Icon from './Icon'
 // import dotenv from 'dotenv';
 
+// const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 function Auth() {
     const styles = useStyles();
@@ -44,7 +45,7 @@ function Auth() {
     }
 
     const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: [e.target.value]})
+        setFormData({...formData, [e.target.name]: e.target.value})
     }
 
 
