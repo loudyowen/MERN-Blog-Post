@@ -6,11 +6,14 @@ import jwt from 'jsonwebtoken'
 // import { json } from "body-parser";
 
 export const signIn = async (req,res)=>{
-    const {email, password} = req.body;
+    const {email, password, sub} = req.body;
 
     try{
         const userExist = await userAccount.findOne({email});
         // console.log(userExist)
+        if(sub){
+            // do google sign in and input data to database
+        }
         if(!userExist) return res.status(404).json({message: "User not exist"})
 
         const passwordCheck = await bcrypt.compare(password, userExist.password);
@@ -24,9 +27,14 @@ export const signIn = async (req,res)=>{
 };
 
 export const signUp = async (req,res)=>{
-    const { email, firstName, lastName, password, confirmPassword } = req.body
+    const { email, firstName, lastName, password, confirmPassword, picture, sub, name } = req.body
     try{
         const userExist = await userAccount.findOne({email});
+        if(sub){
+            if(userExist){
+                // res.status(200) to 
+            }
+        }
         if(userExist){return res.status(400).json({message: "User already exist"})}
         if(password !== confirmPassword){return res.status(400).json({message: "password doesn't match"})}
         const hashPassword = await bcrypt.hash(password, 12)

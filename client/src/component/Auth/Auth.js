@@ -66,7 +66,7 @@ function Auth() {
         // const result = res?.profileObj;
         // const token = res?.tokenId;
         const decoded = jwt_decode(res.credential);
-        // console.log(decode)
+        console.log(decoded)
 
         const { name, picture, sub, email } = decoded;
         try {
@@ -109,7 +109,10 @@ function Auth() {
                             )}
                     </Grid>
                     <Button className={styles.submit} type='submit' color='primary' variant="contained" fullWidth>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>
-                    <GoogleOAuthProvider clientId="89654660246-ead1gr6o4vksarp6tvmapf2bjlg1k8un.apps.googleusercontent.com">
+                    <GoogleOAuthProvider 
+                    clientId="89654660246-ead1gr6o4vksarp6tvmapf2bjlg1k8un.apps.googleusercontent.com" 
+                    responseType="token"
+                    >
                         <GoogleLogin
                             render={(renderProps)=>(
                                 // disabled={renderProps.disabled}
