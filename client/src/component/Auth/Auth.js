@@ -140,3 +140,8 @@ function Auth() {
 }
 
 export default Auth
+
+// google login -> input data email in database -> (no need for name and picture if the user change, just show it in the navbar)
+// if user login again then check if the sub is on database 
+// if yes then find user with the sama id with google sub
+// if done then login to existing user with all the post from user
