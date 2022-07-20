@@ -67,7 +67,7 @@ export const likePost = async(req,res) => {
     // find the user id
     const index = post.likes.findIndex((id)=> io !== String(req.userId));
     // check if the userId is not exist in likes database
-    if(index===-1) {
+    if(index==-1) {
         // like
         post.likes.push(req.userId)
     }else{

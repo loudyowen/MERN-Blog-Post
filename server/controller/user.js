@@ -26,11 +26,11 @@ export const signUp = async (req,res)=>{
         const userExist = await userAccount.findOne({email});
         if(userExist){return res.status(400).json({message: "User already exist"})}
         if(password !== confirmPassword){return res.status(400).json({message: "password doesn't match"})}
-        // const hashPassword = await bcrypt.hash(password, 12)
-        const hashPassword = password
-        const result = await userAccount.create({userName: `${firstName} ${lastName}`, userPassword: hashPassword, email});
-        const token = jwt.sign({email: userExist.email, _id: userExist._id},'userCreationSecret',{expiresIn: "1h"})
-        res.status(200).json({result: result, token})
+        const hashPassword = await bcrypt.hash(password, 12)
+        // const hashPassword = password
+        const userData = await userAccount.create({name: `${firstName} ${lastName}`, userPassword: hashPassword, email});
+        const token = jwt.sign({email: userData.email, id: userData._id},'userCreationSecret',{expiresIn: "1h"})
+        res.status(200).json({userData, token})
     }catch(error){
         res.status(404).json({message: error.message})
     }
