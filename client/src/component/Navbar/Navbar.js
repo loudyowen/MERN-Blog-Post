@@ -43,8 +43,8 @@ function Navbar() {
             if user is not present the just simply show the sign in button*/}
             {user ? (
                 <div className={styles.profile}>
-                    <Avatar className={styles.purple} src={user?.picture} alt={user?.name}>{user?.userData.name.charAt(0)}</Avatar>
-                    <Typography className={styles.userName} variant="h6">{user?.userData.name}</Typography>
+                    <Avatar className={styles.purple} src={user?.picture} alt={user?.name}>{user.userData ? user?.userData?.name.charAt(0) : user?.name.charAt(0) }</Avatar>
+                    <Typography className={styles.userName} variant="h6">{user.userData ? user?.userData?.name : user?.name }</Typography>
                     <Button variant='contained' className={styles.logout} color="secondary" onClick={logout}>Logout</Button>
                 </div>
             ):(

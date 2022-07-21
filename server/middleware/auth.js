@@ -1,9 +1,10 @@
 import jwt, {decode} from 'jsonwebtoken'
 
 const auth = async(req,res,next) => {
+    console.log("auth is working")
     try {
         const token = req.headers.Authorization.split(" ")[1];
-        console.log(token)
+        console.log("auth Token = ",token)
         // if token is bigger than 500 then that's google token
         const myCustomAuth = token.length < 500;
 

@@ -66,11 +66,12 @@ function Auth() {
         // const result = res?.profileObj;
         // const token = res?.tokenId;
         const decoded = jwt_decode(res.credential);
-        console.log(decoded)
-
+        // console.log(decoded)
+        // console.log(res.credential)
         const { name, picture, sub, email } = decoded;
         try {
-            dispatch({type: 'AUTH', data: {name, picture, sub,  email}})
+            // dispatch({type: 'AUTH', data: {name, picture, sub,  email}})
+            dispatch(signIn({name, picture, sub, email},navigate));
             navigate('/')
         } catch (error) {
             console.log(error)
