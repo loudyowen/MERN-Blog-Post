@@ -81,7 +81,6 @@ function Auth() {
         console.log(error)
         console.log("Login failed")
     }
-
     return (
         <Container component="main" maxWidth="xs">
             <Paper className={styles.paper} evelation={3}>
@@ -102,11 +101,12 @@ function Auth() {
                         <Input name="email" label="Email" handleChange={handleChange} type="email" />
                     
                         {/* type berupa if else untuk menentukan apakah user melakukan click show password atau tidak */}
-                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
+                        <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                        
                         
                         {/* hanya muncul untuk sign up */}
                         {isSignUp && (
-                            <Input name="confirmPassword" label="Confrim Password" handleChange={handleChange} type="password" />
+                            <Input name="confirmPassword" label="Confrim Password" handleChange={handleChange} type='password' />
                             )}
                     </Grid>
                     <Button className={styles.submit} type='submit' color='primary' variant="contained" fullWidth>{isSignUp ? 'Sign Up' : 'Sign In'}</Button>

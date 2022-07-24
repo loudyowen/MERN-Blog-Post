@@ -19,6 +19,7 @@ export const getPosts = () => async (dispatch) => {
 }
 
 export const createPost = (post) => async (dispatch) => {
+    console.log(post)
     try {
         const { data } = await api.createPosts(post);
         // same as action in the getPosts

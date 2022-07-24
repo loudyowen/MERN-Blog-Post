@@ -3,23 +3,19 @@ import userAccount from "../models/userAccount.js";
 
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
-// import { json } from "body-parser";
 
 export const signIn = async (req,res)=>{
     const {email, password, sub, name, picture} = req.body;
-    // console.log(req.body)
-    // console.log(email)
 
     try{
         const userExist = await userAccount.findOne({email});
         if(sub){
-            // return res.status(400).json({message: "sub is exist"})
             if(!userExist){
-                // console.log("user not exist")
-                userAccount.create({name, email,image: picture,id: sub})
+                const userData = await userAccount.create({name, email,image: picture,id: sub})
+                const token = jwt.sign({email: userData.email, id: userData.id},'userCreationSecret',{expiresIn: "1h"})
+                return res.status(200).json({userData, token})
             }
             const googleUser = await userAccount.findOne({email});
-            console.log("google user: "+googleUser)
             const token = jwt.sign({email: googleUser.email, id: googleUser.id},'userCreationSecret',{expiresIn: "1h"})       
             return res.status(200).json({userData: googleUser, token})
         }
@@ -34,6 +30,7 @@ export const signIn = async (req,res)=>{
         res.status(404).json({message: error.message})
     }
 };
+
 
 export const signUp = async (req,res)=>{
     const { email, firstName, lastName, password, confirmPassword, picture, sub, name } = req.body

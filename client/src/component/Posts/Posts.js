@@ -10,7 +10,6 @@ const Posts = ({setCurrentId}) => {
     // hook function
     // how do we know it called posts? becase in ../reducers/index.js it called post in combineReducers
     const posts = useSelector((state)=>state.posts);
-    console.log(posts)
     return(
         !posts.length?<CircularProgress/>:(
             <Grid classnName={styles.container} container alignItems="stretch" spacing={3}>
